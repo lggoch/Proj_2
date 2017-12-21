@@ -78,6 +78,17 @@ In order to be able to run "run_s2v.py" you should download the twitter bigram
 	Contains some helpers methods that were implemented during our lab sessions:
 		create_csv_submission(ids, y_pred, name)
 		plot_train_test(train_errors, test_errors, alphas, nb_neurones)
+		
+### - helper_rnn.py
+	Contains the helper function to implement the rnn model in run_RNN.py
+		sep_line(words_file)
+		extract_data(pos,neg,start,end)
+		max_length_pad(ls)
+		generate_input(data,t)
+		getTrainBatch(batchSize,maxSeqLength,padded_docs,nbr_tweet)
+		generate_test(filename)
+
+		
 ### - sent2vec.py
 	Contains the code that generate the embedding of sentences, this code was tooken from the notebook provided by the author of this algorithm. 
 	Reference: Matteo Pagliardini, Prakhar Gupta, Martin Jaggi, [*Unsupervised Learning of Sentence Embeddings using Compositional n-Gram Features*](https://arxiv.org/abs/1703.02507)
