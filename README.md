@@ -4,7 +4,7 @@ The "run.py" allow the user to classify the Sentiment of tweet in a binary manne
 The programme creates a file "kaggle_submission.csv" that correspond to the submission selected on kaggle.
 
 ## Installation
-The machine that will run the programs present in this repo should have installed:
+The machine that will run the programs present in this repo should have installed:<br>
 		- python3 https://www.python.org/downloads/ <br>
 		- the numpy library http://www.numpy.org/<br>
 		- the nlkt library http://www.nltk.org/<br>
@@ -13,15 +13,15 @@ The machine that will run the programs present in this repo should have installe
 		- the tensorflow library https://www.tensorflow.org<br>
 		- the keras library https://keras.io/<br>
 
-The training and test data should be downloaded from kaggle and unziped in the "Proj_2" folder:
+The training and test data should be downloaded from kaggle and unziped in the "Proj_2" folder:<br>
 	- download link https://www.kaggle.com/c/epfml17-text/data
 
 For convenience of the user the "run.py" uses an already trained and saved model. This model is an MLP Classifier and is availabel here **link**. 
 Download the pickle file "Optimal_mlpc.pkl" and save it inside the "Proj_2" folder.
 
-The run.py uses the sent2vec algorithm and uses a pre-trained model. In order to be able to run the programm you should:
-	- download the sent2vec_twitter_bigrams and save it inside the "Proj_2" folder. Be aware that this file is large (23GB)
-	link: https://drive.google.com/open?id=0B6VhzidiLvjSeHI4cmdQdXpTRHc
+The run.py uses the sent2vec algorithm and uses a pre-trained model. In order to be able to run the programm you should:<br>
+	- download the sent2vec_twitter_bigrams and save it inside the "Proj_2" folder. Be aware that this file is large (23GB)<br>
+	link: https://drive.google.com/open?id=0B6VhzidiLvjSeHI4cmdQdXpTRHc<br>
 	- run the `make command inside the "Proj_2" folder to compile the Facebook's FastText library that is used by the sent2vec algorithm.
 
 
@@ -41,20 +41,20 @@ We provide 3 different runable code that doesn't use saved model and that create
 ### run_base.py
 This program produced the submission of our baseline. It uses an external dataset for the embedding. The embedding was trained with the word2vec algorithm. The sentence embedding is represented as the average of the embedding of the words that were present in the vocabulary.
 
-In order to be able to run "run_base.py" you should download the embedding dataset:
-	- Click on this link to download the word embedding http://4530.hostserv.eu/resources/embed_tweets_en_200M_200D.zip
-	- Unzip the file in the "Proj_2" folder
-	- run the `$python3 run_base.py`
+In order to be able to run "run_base.py" you should download the embedding dataset:<br>
+	- Click on this link to download the word embedding http://4530.hostserv.eu/resources/embed_tweets_en_200M_200D.zip<br>
+	- Unzip the file in the "Proj_2" folder<br>
+	- run the `$python3 run_base.py`<br>
 
 This programme will embedd each tweet using the average of all word embedding and then use an MLP classifier to make the prediction.
 
 ### run_RNN.py
 This programm is an improvement of the baseline. It uses the same word embedding but feed thos embedding to a recurrent neural network instead of averaging word.
 
-In order to be able to run "run_RNN.py" you should download the embedding dataset:
-	- Click on this link to download the word embedding http://4530.hostserv.eu/resources/embed_tweets_en_200M_200D.zip
-	- Unzip the file in the "Proj_2" folder
-	- run the `$python3 run_RNN.py`
+In order to be able to run "run_RNN.py" you should download the embedding dataset:<br>
+	- Click on this link to download the word embedding http://4530.hostserv.eu/resources/embed_tweets_en_200M_200D.zip<br>
+	- Unzip the file in the "Proj_2" folder<br>
+	- run the `$python3 run_RNN.py`<br>
 
 ### run_s2v.py
 This programm is similar to "run.py" but doesn't use a pre-saved model.
