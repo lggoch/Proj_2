@@ -28,7 +28,7 @@ Run the following command in your terminal inside the folder "Proj_2":
 
 $python3 run.py
 
-Time contraint : since we are using a pretrained MLP Classifier, only the embedding of the test data is performed, therefore, it doesn't external computation ressource power. The only thing you need is 23 GB of memory to store the bigram.  
+**Time contraint** : since we are using a pretrained MLP Classifier, only the embedding of the test data is performed, therefore, it doesn't external computation ressource power. The only thing you need is 23 GB of memory to store the bigram.  
 However if you would like to run the whole pipeline, namely "run_s2v.py", you will need external computing power in order to run it in less than 2-3h. You will also need at least 70GB of memory (45GB for the embedded training data and 23GB for the bigram itself).
 
 The "run.py" programm will embedd the "test_data.csv" and use the "Optimal_mlpc.pkl" trained and presaved model to output a prediction.
