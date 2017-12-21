@@ -11,13 +11,14 @@ from keras.preprocessing.sequence import pad_sequences
 from training import rnn_model_for_w2v
 import tensorflow as tf
 
-def run(batchSize,lstmUnits,iterations):
+def run():
     """
     Run the RNN model using and output a CSV file for kaggle Submission.
-    Arguments: batchSize (the size of the batch)
-               lstmUnits (the number of neuron in the lstm neuron net layer.)
-               iteration (the number of i)
+
     """
+    batchSize = 1000
+    lstmUnits = 80
+    iterations = 10000
     output_filename = r"lstm_unit" + str(lstmUnits) + "_bs_" + str(batchSize) +"_i_"+str(iterations) +".csv"
     pos_filename = "train_pos_full.txt"
     neg_filename = "train_neg_full.txt"
@@ -119,7 +120,5 @@ def run(batchSize,lstmUnits,iterations):
     return 0
 
 if __name__ == "__main__":
-    batchSize = 1000
-    lstmUnits = 80
-    iterations = 10000
-    run(batchSize, lstmUnits, iterations)
+
+    run()
