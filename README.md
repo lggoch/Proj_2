@@ -16,9 +16,6 @@ The machine that will run the programs present in this repo should have installe
 The training and test data should be downloaded from kaggle and unziped in the "Proj_2" folder:<br>
 	- download link https://www.kaggle.com/c/epfml17-text/data
 
-For convenience of the user the "run.py" uses an already trained and saved model. This model is an MLP Classifier and is availabel here **link**. 
-Download the pickle file "Optimal_mlpc.pkl" and save it inside the "Proj_2" folder.
-
 The run.py uses the sent2vec algorithm and uses a pre-trained model. In order to be able to run the programm you should:<br>
 	- download the sent2vec_twitter_bigrams and save it inside the "Proj_2" folder. Be aware that this file is large (23GB)<br>
 	link: https://drive.google.com/open?id=0B6VhzidiLvjSeHI4cmdQdXpTRHc<br>
@@ -31,7 +28,7 @@ Run the following command in your terminal inside the folder "Proj_2":
 
 $python3 run.py
 
-The "run.py" programm will embedd the "test_data.csv" and use the "Optimal_mlpc" trained model to output a prediction.
+The "run.py" programm will embedd the "test_data.csv" and use the "Optimal_mlpc.pkl" trained and presaved model to output a prediction.
 
 
 ## Other Runable Programs
