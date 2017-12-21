@@ -5,14 +5,14 @@ The programme creates a file "kaggle_submission.csv" that correspond to the subm
 
 ## Installation
 The machine that will run the programs present in this repo should have installed:
-	- python3 https://www.python.org/downloads/
-	- the numpy library http://www.numpy.org/
-	- the nlkt library http://www.nltk.org/
-	- the sklearn library http://scikit-learn.org/
-	- the multiprocessing library 
-	- the matplotlib library https://matplotlib.org
-	- the tensorflow library https://www.tensorflow.org
-	- the keras library https://keras.io/
+		- python3 https://www.python.org/downloads/
+		- the numpy library http://www.numpy.org/
+		- the nlkt library http://www.nltk.org/
+		- the sklearn library http://scikit-learn.org/
+		- the multiprocessing library 
+		- the matplotlib library https://matplotlib.org
+		- the tensorflow library https://www.tensorflow.org
+		- the keras library https://keras.io/
 
 The training and test data should be downloaded from kaggle and unziped in the "Proj_2" folder:
 	- download link https://www.kaggle.com/c/epfml17-text/data
@@ -108,5 +108,8 @@ In order to be able to run "run_s2v.py" you should download the twitter bigram
 		run()
 
 
+## Additional notes
 
+For complementary informations about the methods check the DocStrings.
+And for comprehensive informations about the detailed thinking behind this code check the project report
 
