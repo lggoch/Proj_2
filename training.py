@@ -2,19 +2,9 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 import numpy as np
-
+import tensorflow as tf
 
 def mlpc_model_for_s2v(train_data, train_labels, nb_neur, alpha, depth, save=False):
-    """
-    Create the Multi-Layer Perceptron classifier for the sent2vec embedding data
-    :param train_data: The training data (positive and negative) embedded via the sent2vec algorithm
-    :param train_labels: The labels of the training data (-1 for negative, 1 for positive)
-    :param nb_neur: The number of neurones per hidden layer
-    :param alpha: The alpha regularization parameter
-    :param depth: The depth of the neural network
-    :param save: Whether you would like to same the model or not
-    :return: The trained model ready to make prediction
-    """
     hidden_layer_size = tuple(np.repeat(nb_neur, depth))
     mlpc = MLPClassifier(hidden_layer_sizes=hidden_layer_size, alpha=alpha, activation='tanh')
     mlpc.fit(train_data, train_labels)
@@ -23,18 +13,37 @@ def mlpc_model_for_s2v(train_data, train_labels, nb_neur, alpha, depth, save=Fal
     return mlpc
 
 
-def rnn_model_for_w2v():
-    return 0
+def rnn_model_for_w2v(batchSize,numClasses,max_length,emb_dimension,lstmUnits, embedding_matrix):
+    #Create the model
+    tf.reset_default_graph()
+
+    labels = tf.placeholder(tf.float32, [batchSize, numClasses])
+    input_data = tf.placeholder(tf.int32, [batchSize, max_length])
+
+
+    data = tf.Variable(tf.zeros([batchSize, max_length, emb_dimension]), dtype=tf.float32)
+    data = tf.nn.embedding_lookup(embedding_matrix, input_data)
+
+    lstmCell = tf.contrib.rnn.BasicLSTMCell(lstmUnits)
+    lstmCell = tf.contrib.rnn.DropoutWrapper(cell=lstmCell, output_keep_prob=0.75)
+    value, _ = tf.nn.dynamic_rnn(lstmCell, data, dtype=tf.float32)
+
+    weight = tf.Variable(tf.truncated_normal([lstmUnits, numClasses]))
+    bias = tf.Variable(tf.constant(0.1, shape=[numClasses]))
+    value = tf.transpose(value, [1, 0, 2])
+    last = tf.gather(value, int(value.get_shape()[0]) - 1)
+    prediction = (tf.matmul(last, weight) + bias)
+
+    correctPred = tf.equal(tf.argmax(prediction, 1), tf.argmax(labels, 1))
+    accuracy = tf.reduce_mean(tf.cast(correctPred, tf.float32))
+
+
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=labels))
+    optimizer = tf.train.AdamOptimizer().minimize(loss)
+    return (accuracy,optimizer,prediction,input_data,labels)
 
 
 def mlpc_model_for_w2v(train_data, train_labels, test_data):
-    """
-    Create the Multi-Layer Perceptron classifier for the average with word2vec embedding data
-    :param train_data: The embedded training data via averaging all the word embeddings of a tweet
-    :param train_labels: The labels of the training data (-1 for negative, 1 for positive)
-    :param test_data: The embedded test data via averaging all the word embeddings of a tweet
-    :return:The prediction labels for the test data
-    """
     mlpc = MLPClassifier()
     mlpc.fit(train_data, train_labels)
     prediction = mlpc.predict(test_data)
@@ -42,17 +51,6 @@ def mlpc_model_for_w2v(train_data, train_labels, test_data):
 
 
 def validation_s2v(train_data, train_labels, alphas, neurones, depth):
-    """
-    Separate the train_data into a train and a validation set. The validation set is used to choose hyper parameters.
-    :param train_data:The embedded training data via sent2vec
-    :param train_labels: The labels of the training data (-1 for negative, 1 for positive)
-    :param alphas: The different alphas to test
-    :param neurones: The different K to test, where K is the number of neurones per hidden layer
-    :param depth: The depth of the neural network
-    :return: The array containing all pair of hyperparameters that were tested
-    :return: The array containing the training accuracy for all pair of hyperparameters
-    :return: The array containing the validation accuracy for all pair of hyperparameters
-    """
     hidden_layer_size = tuple(np.repeat(neurones, depth))
     train_scores = []
     test_scores = []

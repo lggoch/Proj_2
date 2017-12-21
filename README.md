@@ -99,10 +99,6 @@ In order to be able to run "run_s2v.py" you should download the twitter bigram
 		read_embeddings(embeddings_path)
 		dump_text_to_disk(file_path, X, Y=None)
 		get_sentence_embeddings(sentences)
-### - validation.py
-	The code that was used to produced the train/validation error plots
-	Contains a main function:
-			validate()
 
 ### - run_s2v.py
 	The full implementation of the Text sentiment classification using sent2vec.
